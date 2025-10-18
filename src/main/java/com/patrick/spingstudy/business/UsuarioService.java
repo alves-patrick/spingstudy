@@ -17,7 +17,7 @@ public class UsuarioService {
             emailExistente(usuario.getEmail());
             return usuarioRepository.save(usuario);
         } catch (Exception e){
-            throw new ConflictException("Emaila ja cadastrado",e.getCause());
+            throw new ConflictException("Email já cadastrado",e.getCause());
         }
 
     }
@@ -26,10 +26,10 @@ public class UsuarioService {
         try{
             boolean  existe = usuarioRepository.existsByEmail(email);
             if(existe){
-                throw new ConflictException("Email ja cadastrado" + email);
+                throw new ConflictException("Email já cadastrado" + email);
             }
         } catch (Exception e){
-            throw new ConflictException("Email ja cadastrado" + e.getCause());
+            throw new ConflictException("Email já cadastrado" + e.getCause());
         }
     }
 
