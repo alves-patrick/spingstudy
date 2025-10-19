@@ -2,6 +2,7 @@ package com.patrick.spingstudy.business;
 
 import com.patrick.spingstudy.infrastructure.entity.Usuario;
 import com.patrick.spingstudy.infrastructure.exceptions.ConflictException;
+import com.patrick.spingstudy.infrastructure.exceptions.ResourceNotFoundException;
 import com.patrick.spingstudy.infrastructure.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -40,4 +41,12 @@ public class UsuarioService {
         return usuarioRepository.existsByEmail(email);
     }
 
+    public Usuario buscaUsuarioPorEmail(String email){
+        return usuarioRepository.findByEmail(email).orElseThrow(
+
+                () -> new ResourceNotFoundException("Email não encontrado" + email ));
+    }
+    public void  deletaUsuarioPorEmail(String email){
+        usuarioRepository.deleteByEmail(email);
+    }
 }
